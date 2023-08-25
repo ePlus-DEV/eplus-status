@@ -7,6 +7,10 @@ export default defineNuxtConfig({
       viewport: "width=device-width, initial-scale=1",
     },
   },
+  modules: ["@nuxthq/ui", "nuxt-highcharts"],
+  colorMode: {
+    preference: "light",
+  },
   nitro: {
     preset: "node-server",
   },
