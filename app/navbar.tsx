@@ -1,7 +1,13 @@
 'use client';
 
-import { Alert } from 'flowbite-react';
+import { Alert , DarkThemeToggle, Flowbite  } from 'flowbite-react';
 
 export default function Navbar() {
-  return <Alert color="info">Alert!</Alert>;
+    return (
+    <Flowbite>
+
+      <DarkThemeToggle />
+
+    </Flowbite>
+  );
 }
