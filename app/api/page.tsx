@@ -1,49 +1,52 @@
-"use client"; // This is a client component 👈🏽
+"use client"; // Đây là một thành phần client
 
 import React, { useEffect, useState } from "react";
 
-// anticipate the returned response
-type TodoResponse = {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
+type ResponseTime = {
+  duration_seconds_reporting_error: number | null;
+  average_response_time_milliseconds_available: number;
+  duration_seconds_not_responding: number | null;
+  end: string;
+  start: string;
+  duration_seconds_paused: number;
+  duration_seconds_available: number;
+  average_response_time_milliseconds_reporting_error: number | null;
 };
+
+type ApiResponse = {
+  report_start: string;
+  response_times: ResponseTime[];
+};
+
 const Example1UseEffect = () => {
-  // set the states for data,loading, and error
-  const [data, setData] = useState<TodoResponse | null>(null);
+  const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // use useEffect to load data after the first render
   useEffect(() => {
-    // set loading to true before calling fetch
     setLoading(true);
 
-    fetch(`https://jsonplaceholder.typicode.com/todos/1`)
+    fetch("https://api.freshping.io/v1/public-check-response-times-reports/873076/?for_hours=2256&aggregate_by=days")
       .then(async (res) => {
-        // set the data if the response is successful
-        const todo: TodoResponse = await res.json();
-        setData(todo);
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const apiResponse: ApiResponse = await res.json();
+        setData(apiResponse);
       })
       .catch((e) => {
-        // set the error if there's an error like 404, 400, etc
         if (e instanceof Error) {
           setError(e.message);
         }
       })
       .finally(() => {
-        // set loading to false after everything has completed.
         setLoading(false);
       });
   }, []);
 
-  // display for loading component
   const loadingComponent = <div>Loading...</div>;
-  // display for error component
   const errorComponent = <div className="text-red-500">Error: {error}</div>;
 
-  // display loading, error and data based on the state
   return (
     <div className="p-24">
       {loading ? (
