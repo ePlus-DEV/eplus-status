@@ -1,66 +1,54 @@
-"use client"; // Đây là một thành phần client
+import { Grid, Col, Card,Text, Metric , Title, AreaChart } from "@tremor/react";
 
-import React, { useEffect, useState } from "react";
+const chartdata = [
+  {
+    date: "Jan 22",
+    SemiAnalysis: 2890,
+    "The Pragmatic Engineer": 2338,
+  },
+  {
+    date: "Feb 22",
+    SemiAnalysis: 2756,
+    "The Pragmatic Engineer": 2103,
+  },
+  {
+    date: "Mar 22",
+    SemiAnalysis: 3322,
+    "The Pragmatic Engineer": 2194,
+  },
+  {
+    date: "Apr 22",
+    SemiAnalysis: 3470,
+    "The Pragmatic Engineer": 2108,
+  },
+  {
+    date: "May 22",
+    SemiAnalysis: 3475,
+    "The Pragmatic Engineer": 1812,
+  },
+  {
+    date: "Jun 22",
+    SemiAnalysis: 3129,
+    "The Pragmatic Engineer": 1726,
+  },
+];
 
-type ResponseTime = {
-  duration_seconds_reporting_error: number | null;
-  average_response_time_milliseconds_available: number;
-  duration_seconds_not_responding: number | null;
-  end: string;
-  start: string;
-  duration_seconds_paused: number;
-  duration_seconds_available: number;
-  average_response_time_milliseconds_reporting_error: number | null;
+const dataFormatter = (number: number) => {
+  return "$ ";
 };
 
-type ApiResponse = {
-  report_start: string;
-  response_times: ResponseTime[];
-};
-
-const Example1UseEffect = () => {
-  const [data, setData] = useState<ApiResponse | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    setLoading(true);
-
-    fetch("https://api.freshping.io/v1/public-check-response-times-reports/873076/?for_hours=2256&aggregate_by=days")
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        const apiResponse: ApiResponse = await res.json();
-        setData(apiResponse);
-      })
-      .catch((e) => {
-        if (e instanceof Error) {
-          setError(e.message);
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
-  const loadingComponent = <div>Loading...</div>;
-  const errorComponent = <div className="text-red-500">Error: {error}</div>;
-
+export default function About() {
   return (
-    <div className="p-24">
-      {loading ? (
-        loadingComponent
-      ) : error ? (
-        errorComponent
-      ) : (
-        <div>
-          <p>Loading complete and no errors. Displaying data...</p>
-          <code>{JSON.stringify(data, null, 4)}</code>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Example1UseEffect;
+    <Card>
+    <Title>Newsletter revenue over time (USD)</Title>
+    <AreaChart
+      className="h-72 mt-4"
+      data={chartdata}
+      index="date"
+      categories={["SemiAnalysis", "The Pragmatic Engineer"]}
+      colors={["indigo", "cyan"]}
+      // valueFormatter={dataFormatter}
+    />
+  </Card>
+  )
+}
