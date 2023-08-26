@@ -17,16 +17,10 @@ export default function NavbarWithDropdown() {
         <div className="flex md:order-2">
             <DarkThemeToggle />
         </div>
-        <Navbar.Collapse>
-            <Navbar.Link active href="#">
-                <Link href="/">Home</Link>
-            </Navbar.Link>
-            <Navbar.Link href="#">
-                <Link target="_blank" href="https://eplus.dev/about">About</Link>
-            </Navbar.Link>
-            <Navbar.Link href="#">
-                <Link target="_blank" href="https://radio.eplus.dev">ePlus Radio</Link>
-            </Navbar.Link>
+            <Navbar.Collapse>
+            <Link href="/">Home</Link>
+            <Link target="_blank" href="https://eplus.dev/about">About</Link>
+            <Link target="_blank" href="https://radio.eplus.dev">ePlus Radio</Link>
         </Navbar.Collapse>
       </Navbar>
     </Flowbite>

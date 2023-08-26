@@ -37,7 +37,7 @@ const dataFormatter = (number: number) => {
   return "$ ";
 };
 
-export default function Home() {
+export default function About() {
   return (
     <Card>
     <Title>Newsletter revenue over time (USD)</Title>
