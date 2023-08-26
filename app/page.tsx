@@ -1,9 +1,8 @@
-"use client"; // Đây là một thành phần client
+"use client";
 
 import React, { useEffect, useState } from "react";
-import { Grid, Col, Card, Text, Metric, Title, AreaChart, Tracker } from "@tremor/react";
-import { Spinner } from 'flowbite-react';
-import dayjs from "dayjs"; // Import thư viện dayjs
+import { Card, Title, AreaChart, Tracker,  } from "@tremor/react";
+import dayjs from "dayjs";
 import { SkeletonCard } from "@/components/skeleton";
 
 type ResponseTime = {
@@ -68,8 +67,8 @@ const Home = () => {
   };
   
   return (
-    <Card>
-    <Title>ePlus.DEV - Performance metrics</Title>
+    <Card className="max-w-xl mx-auto" decoration="top" decorationColor="indigo">
+    <Title>ePlus.DEV - Performance metrics </Title>
       {loading1 || loading2 ? (
         <SkeletonCard/>
       ) : error1 || error2 ? (
