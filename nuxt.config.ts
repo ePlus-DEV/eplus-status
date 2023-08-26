@@ -12,6 +12,6 @@ export default defineNuxtConfig({
     preference: "light",
   },
   nitro: {
-    preset: "node-server",
+    preset: "netlify",
   },
 });
