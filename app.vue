@@ -34,5 +34,7 @@ const chartOptions = computed(() => ({
 </script>
 <template>
   {{ chartOptions }}
-  <highchart :options="chartOptions" />
+  <client-only>
+    <highchart :options="chartOptions" />
+  </client-only>
 </template>
