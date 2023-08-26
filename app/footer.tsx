@@ -6,9 +6,9 @@ export default function DefaultFooter() {
   return (
     <Footer container>
       <Footer.Copyright
-        by="Flowbite™"
-        href="#"
-        year={2022}
+        by="ePlus.DEV"
+        href="https://eplus.dev"
+        year={2023}
       />
       <Footer.LinkGroup>
         <Footer.Link href="#">
